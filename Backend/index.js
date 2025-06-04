@@ -1,0 +1,34 @@
+// Import required modules
+var express = require('express');
+var mongoose = require('mongoose');
+var dotenv = require('dotenv');
+var cors = require('cors');
+
+var app = express();
+
+// Load environment variables from .env file
+dotenv.config();
+
+// Middleware setup
+app.use(express.json()); // Parse incoming JSON requests
+app.use(cors());         // Enable Cross-Origin Resource Sharing
+
+// Import routers
+var AdminRouter = require('./routes/AdminRouter');
+
+// Register routers
+app.use('/Admin', AdminRouter);
+
+// Connect to MongoDB using the connection string from environment variables
+mongoose.connect(process.env.MongoDB_URI)
+    .then(() => {
+        console.log('Connected to MongoDB');
+    })
+    .catch((err) => {
+        console.error('Error connecting to MongoDB:', err);
+    });
+
+// Start the server on port 5000
+app.listen(5000, () => {
+    console.log('Server is running on port 5000');
+});
