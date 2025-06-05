@@ -1,6 +1,9 @@
 import React, { useState } from 'react'
 import '../style/AdminLogin.css'
 import { adminApi } from '../services/adminApi'
+import { useDispatch } from 'react-redux';
+import { AdminLoginFun } from '../redux/adminSlice'
+import { useNavigate } from 'react-router-dom';
 
 function AdminLogin() {
 
@@ -8,6 +11,9 @@ function AdminLogin() {
         adminEmail: '',
         adminPassword: ''
     })
+
+    var dispatch = useDispatch()
+    var navigate = useNavigate()
 
     function handleData(e) {
         var {name, value} = e.target;
@@ -20,7 +26,8 @@ function AdminLogin() {
     async function adminLogin() {
         var response = await adminApi(loginData)
         console.log("Response from adminLogin:", response);
-        
+        dispatch(AdminLoginFun(response.data))
+        navigate('/Admin')
     }
 
     return (
