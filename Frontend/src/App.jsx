@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import AdminLogin from './adminPages/AdminLogin'
 import { useSelector } from 'react-redux'
 import AdminHome from './adminPages/AdminHome'
+import AdminaddProduct from './adminPages/AdminaddProduct'
 
 
 
@@ -24,6 +25,7 @@ function App() {
 
           <Route path='/Admin-login' element={<AdminLogin />} />
           <Route path='/Admin' element={Token ? <AdminHome /> : <AdminLogin />} />
+          <Route path='/AdminaddProduct' element={Token ? <AdminaddProduct/> : <AdminLogin/>} />
 
         </Routes>
 

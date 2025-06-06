@@ -12,10 +12,11 @@ function AdminNavbar() {
   }
   return (
     <div className='admin-navbar-main'>
-      <p>Home</p>
+      <Link to={'/Admin'}>Home</Link>
       <p>Add Product</p>
       <p>View Product</p>
       <p>All Users</p>
+      <Link to={'/AdminaddProduct'}>Admin Add Product</Link>
       <button onClick={handleAdminLogout}>Logout</button>
     </div>
   )
