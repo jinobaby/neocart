@@ -5,17 +5,15 @@ import { useSelector } from 'react-redux'
 import AdminHome from './adminPages/AdminHome'
 import AdminaddProduct from './adminPages/AdminaddProduct'
 
-
-
 function App() {
 
-  var adminLoginInfo = useSelector((state) => state.AdminLogin.AdminLoginData[0])
+  var adminLoginInfo = useSelector((state) => state.AdminLogin?.AdminLoginData[0])
   console.log("from app.jsx", adminLoginInfo);
   if (adminLoginInfo) {
     var Token = adminLoginInfo.Token
+    console.log(Token);
+    
   }
-
-  useSelector
   return (
     <div>
 

@@ -29,10 +29,11 @@ app.use(cors());         // Enable Cross-Origin Resource Sharing
 
 // Import routers
 var AdminRouter = require('./routes/AdminRouter');
+var ProductRouter = require('./routes/ProductRouter')
 
 // Register routers
 app.use('/Admin', AdminRouter);
-
+app.use('/Product', ProductRouter)
 
 
 // Start the server on port 5000

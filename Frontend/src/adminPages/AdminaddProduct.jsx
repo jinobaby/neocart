@@ -1,24 +1,24 @@
 import React, { useState } from 'react'
 import AdminNavbar from '../Components/AdminNavbar'
+import { AddProductAPI } from '../services/adminApi'
 import '../style/AdminLogin.css'
 
 function AdminaddProduct() {
 
-    var [productImage, setProductImage] = useState('')
+    var [productImage, setProductImage] = useState()
     var [imagePreview, setImagePreview] = useState('')
     var [product, setProduct] = useState({
-        productname:'',
-        productprice:'',
-        productcompany:'',
-        productdescription:''
+        productName: '',
+        productPrice: '',
+        productCompany: '',
+        productDescription: ''
     })
-    console.log(product);
-    
 
     function handleImagePrev(e) {
+        setProductImage(e.target.files[0])
         var file = e.target.files[0]
 
-        if(file) {
+        if (file) {
             const reader = new FileReader()
             reader.onload = () => {
                 setImagePreview(reader.result)
@@ -27,83 +27,110 @@ function AdminaddProduct() {
         }
     }
 
-    function adddata(e) {
-        var {name, value} = e.target
+    function addData(e) {
+        var { name, value } = e.target
         setProduct((preview) => ({
             ...preview,
-            [name]:value
+            [name]: value
         }))
     }
 
-  return (
-    <div className='login-main'>
-        <AdminNavbar/>
-        <h1>Admin Add Product</h1>
-        <section className='main-login-form'>
-            {
-                imagePreview ? (
-                    <img src={imagePreview} alt="preview" style={{
-                        height:'300px',
-                        width: '300px'
-                    }} />
-                ) : (
-                    <div className='image-preview-section' style={{
-                        height:'300px',
-                        width: '300px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems:'center',
-                        border: '1px solid #000000',
-                        borderRadius: '38px'
-                    }}>+</div>
-                )
-            }
-            <input type="file" onChange={handleImagePrev}/>
+    async function addProduct() {
+        const formdata = new FormData()
 
-            <div>
-                <label htmlFor="productname">PRODUCT NAME</label>
-                <input 
-                className='login-input' 
-                type="text" 
-                placeholder='Enter product name'
-                name='productname' 
-                onChange={adddata} />
-            </div>
+        formdata.append('productImage', productImage)
+        formdata.append('productName', product.productName)
+        formdata.append('productPrice', product.productPrice)
+        formdata.append('productDescription', product.productDescription)
+        formdata.append('productCompany', product.productCompany)
 
-            <div>
-                <label htmlFor="productprice">PRODUCT PRICE</label>
-                <input 
-                className='login-input' 
-                type="number" 
-                placeholder='Enter product price'
-                name='productprice'
-                onChange={adddata} />
-            </div>
+        var response = await AddProductAPI(formdata)
+        console.log(response.data);
+        alert(response.message)
+        setProduct('')
+        setImagePreview('')
+        setProduct({
+            productCompany:'',
+            productDescription: '',
+            productName: '',
+            productPrice: ''
 
-            <div>
-                <label htmlFor="productcompany">PRODUCT COMPANY</label>
-                <input 
-                className='login-input' 
-                type="text" 
-                placeholder='Enter brand name'
-                name='productcompany'
-                onChange={adddata} />
-            </div>
+        })
+    }
 
-            <div>
-                <label htmlFor="productdescription">PRODUCT DESCRIPTION</label>
-                <input 
-                className='login-input' 
-                type="text" 
-                placeholder='Enter product description'
-                name = 'productdescription' 
-                onChange={adddata} />
-            </div>
+    return (
+        <div className='login-main'>
+            <AdminNavbar />
+            <h1>Admin Add Product</h1>
+            <section className='main-login-form'>
+                {
+                    imagePreview ? (
+                        <img src={imagePreview} alt="preview" style={{
+                            height: '300px',
+                            width: '300px'
+                        }} />
+                    ) : (
+                        <div className='image-preview-section' style={{
+                            height: '300px',
+                            width: '300px',
+                            display: 'flex',
+                            justifyContent: 'center',
+                            alignItems: 'center',
+                            border: '1px solid #000000',
+                            borderRadius: '38px'
+                        }}>+</div>
+                    )
+                }
+                <input type="file" onChange={handleImagePrev} />
 
-            <button className='login-btn'>Submit</button>
-        </section>
-    </div>
-  )
+                <div>
+                    <label htmlFor="productName">PRODUCT NAME</label>
+                    <input
+                        className='login-input'
+                        type="text"
+                        placeholder='Enter product name'
+                        name='productName'
+                        onChange={addData}
+                        value={product.productName} />
+                </div>
+
+                <div>
+                    <label htmlFor="productPrice">PRODUCT PRICE</label>
+                    <input
+                        className='login-input'
+                        type="number"
+                        placeholder='Enter product price'
+                        name='productPrice'
+                        onChange={addData}
+                        value={product.productPrice} />
+                </div>
+
+                <div>
+                    <label htmlFor="productCompany">PRODUCT COMPANY</label>
+                    <input
+                        className='login-input'
+                        type="text"
+                        placeholder='Enter brand name'
+                        name='productCompany'
+                        onChange={addData}
+                        value={product.productCompany} />
+                </div>
+
+                <div>
+                    <label htmlFor="productDescription">PRODUCT DESCRIPTION</label>
+                    <input
+                        className='login-input'
+                        type="text"
+                        placeholder='Enter product description'
+                        name='productDescription'
+                        onChange={addData}
+                        value={product.productDescription} />
+                </div>
+
+                <button onClick={addProduct} className='login-btn'>Submit</button>
+            </section>
+        </div>
+    )
 }
 
 export default AdminaddProduct
