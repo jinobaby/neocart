@@ -1,13 +1,20 @@
 import React from 'react'
 import AdminNavbar from '../Components/AdminNavbar'
 import AdminFootbar from '../Components/AdminFootbar'
+import { Outlet } from 'react-router-dom'
 
-function AdminHome() {
+function AdminLayout() {
   return (
     <div>
-      <h1>Admin Home</h1>
+        
+        <AdminNavbar/>
+
+        <Outlet/>
+
+        <AdminFootbar/>
+
     </div>
   )
 }
 
-export default AdminHome
+export default AdminLayout

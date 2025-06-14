@@ -54,13 +54,11 @@ function AdminaddProduct() {
             productDescription: '',
             productName: '',
             productPrice: ''
-
         })
     }
 
     return (
         <div className='login-main'>
-            <AdminNavbar />
             <h1>Admin Add Product</h1>
             <section className='main-login-form'>
                 {
