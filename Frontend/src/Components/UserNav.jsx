@@ -14,8 +14,8 @@ function UserNav() {
   }
   return (
     <div className='admin-navbar-main'>
-      <Link to={'/Admin'}>Home</Link>
-      <Link to={'/AdminaddProduct'}>Admin Add Product</Link>
+      <Link to={'/home'}>Home</Link>
+      <Link to={'/cart'}>Cart</Link>
       <button onClick={handleUserLogout}>Logout</button>
     </div>
   )

@@ -25,7 +25,7 @@ export const userLoginApi = async ( data ) => {
 // get all product 
 export const allProduct = async () => {
     try {
-        var response = await basicRequest.get('/product/All-product')
+        var response = await basicRequest.get('/Product/All-product')
         return response.data;
     } catch (error) {
         console.log('Error from getting all products API', error);
@@ -40,5 +40,25 @@ export const addcartApi = async (data) => {
         
     } catch (error) {
         console.log('Error from add to cart API', error);
+    }
+}
+
+// get cart items
+export const getCartProduct = async (id) => {
+    try {
+        var response = await UserRequest.get(`/Cart/get-cart/${id}`)
+        return response;
+        
+    } catch (error) {
+        console.log('Error from getting cart items API', error);
+    }
+}
+
+export const removeCartApi = async (cartId) => {
+    try {
+        const response = await UserRequest.delete(`/Cart/remove-cart/${cartId}`);
+        return response.data;
+    } catch (error) {
+        console.log('Error from remove cart API', error);
     }
 }

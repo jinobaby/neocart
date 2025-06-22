@@ -10,6 +10,7 @@ import UserSignup from './UserPages/UserSignup'
 import UserLogin from './UserPages/UserLogin'
 import Home from './UserPages/home'
 import Userlayout from './Layout/UserLayout'
+import UserCart from './UserPages/UserCart'
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
           <Route element={<UserPrivate> <Userlayout/> </UserPrivate>}>
 
           <Route element={<Home/>} path='/home'/>
+          <Route element={<UserCart/>} path='/cart'/>
 
 
           </Route>
