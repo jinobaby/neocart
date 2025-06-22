@@ -22,3 +22,20 @@ AdminRequest.interceptors.request.use(
         return config
     }
 )
+
+export const UserRequest = axios.create({
+    baseURL: Baseurl
+})
+
+UserRequest.interceptors.request.use(
+    (config) => {
+        var persistLogindata = localStorage.getItem('persist:logindata')
+        var Logindata = persistLogindata ? JSON.parse(persistLogindata) : {}
+        var loginInfo = Logindata.UserLogin ? JSON.parse(Logindata.UserLogin).UserLoginStore : null
+        var Token = loginInfo.Token
+        if (Token) {
+            config.headers.Authorization = `${Token}`
+        }
+        return config
+    }
+)

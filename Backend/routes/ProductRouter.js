@@ -40,4 +40,15 @@ router.post('/addproduct', VerifyToken, upload.single('productImage'), async (re
     }
 })
 
+// get all products
+router.get('/All-product', async (req, res) => {
+    try {
+        var allProducts = await ProductSchema.find()
+        res.status(200).json(allProducts)
+    } catch (error) {
+        console.log("error from getting all products", error);
+        res.status(500).json(error)
+    }
+})
+
 module.exports = router;

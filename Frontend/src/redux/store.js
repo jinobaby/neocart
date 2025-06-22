@@ -15,6 +15,7 @@ import storage from 'redux-persist/lib/storage';
 
 //slice file import
 import AdminLoginSlice from './adminSlice';
+import UserLoginSlice from './userSlice';
 
 const persistConfig = {
   key: 'logindata',
@@ -22,7 +23,8 @@ const persistConfig = {
   storage,
 }
 const Rootreducer = combineReducers({
-  AdminLogin: AdminLoginSlice
+  AdminLogin: AdminLoginSlice,
+  UserLogin: UserLoginSlice,
 })
 
 const persistedReducer = persistReducer(persistConfig,Rootreducer)

@@ -1,27 +1,24 @@
 import React from 'react'
 import '../style/adminNavbar.css'
 import { Link, useNavigate } from 'react-router-dom'
-import { AdminLogoutFun } from '../redux/adminSlice'
 import { useDispatch } from 'react-redux'
+import { clearUserLogin } from '../redux/userSlice'
 
-function AdminNavbar() {
+function UserNav() {
   var dispatch = useDispatch()
   var navigate = useNavigate()
 
-  function handleAdminLogout() {
-    dispatch(AdminLogoutFun())
+  function handleUserLogout() {
+    dispatch(clearUserLogin())
     navigate('/Admin-login')
   }
   return (
     <div className='admin-navbar-main'>
       <Link to={'/Admin'}>Home</Link>
-      <p>Add Product</p>
-      <p>View Product</p>
-      <p>All Users</p>
       <Link to={'/AdminaddProduct'}>Admin Add Product</Link>
-      <button onClick={handleAdminLogout}>Logout</button>
+      <button onClick={handleUserLogout}>Logout</button>
     </div>
   )
 }
 
-export default AdminNavbar
+export default UserNav
